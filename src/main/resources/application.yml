@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: helpdesk-api
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/helpdesk
+    username: helpdesk_user
+    password: helpdesk_pass
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      # validate = nunca deixa o Hibernate alterar o schema sozinho.
+      # Quem manda no schema é o Flyway (boa prática em projeto profissional).
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+server:
+  port: 8080
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
